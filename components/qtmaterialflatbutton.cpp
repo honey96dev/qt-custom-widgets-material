@@ -53,6 +53,7 @@ void QtMaterialFlatButtonPrivate::init()
     useThemeColors       = true;
     useFixedRippleRadius = false;
     haloVisible          = true;
+    isHalfRipple         = false;
 
     q->setStyle(&QtMaterialStyle::instance());
     q->setAttribute(Qt::WA_Hover);
@@ -320,6 +321,21 @@ bool QtMaterialFlatButton::isHaloVisible() const
     return d->haloVisible;
 }
 
+void QtMaterialFlatButton::setHalfRipple(bool halfRipple)
+{
+    Q_D(QtMaterialFlatButton);
+
+    d->isHalfRipple = halfRipple;
+    update();
+}
+
+bool QtMaterialFlatButton::isHalfRipple() const
+{
+    Q_D(const QtMaterialFlatButton);
+
+    return d->isHalfRipple;
+}
+
 void QtMaterialFlatButton::setOverlayStyle(Material::OverlayStyle style)
 {
     Q_D(QtMaterialFlatButton);
@@ -515,7 +531,7 @@ void QtMaterialFlatButton::mousePressEvent(QMouseEvent *event)
         if (d->useFixedRippleRadius) {
             radiusEndValue = d->fixedRippleRadius;
         } else {
-            radiusEndValue = static_cast<qreal>(width());
+            radiusEndValue = static_cast<qreal>(width()) / (d->isHalfRipple ? 2 : 1);
         }
 
         QtMaterialRipple *ripple = new QtMaterialRipple(pos);
@@ -523,8 +539,8 @@ void QtMaterialFlatButton::mousePressEvent(QMouseEvent *event)
         ripple->setRadiusEndValue(radiusEndValue);
         ripple->setOpacityStartValue(0.35);
         ripple->setColor(foregroundColor());
-        ripple->radiusAnimation()->setDuration(1000);
-        ripple->opacityAnimation()->setDuration(1800);
+        ripple->radiusAnimation()->setDuration((d->isHalfRipple ? 600 : 1000));
+        ripple->opacityAnimation()->setDuration((d->isHalfRipple ? 1300 : 1800));
 
         d->rippleOverlay->addRipple(ripple);
     }

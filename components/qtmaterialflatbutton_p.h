@@ -41,6 +41,7 @@ public:
     bool                              useThemeColors;
     bool                              useFixedRippleRadius;
     bool                              haloVisible;
+    bool                              isHalfRipple;
 };
 
 #endif // QTMATERIALFLATBUTTON_P_H

@@ -17,6 +17,7 @@ class QtMaterialFlatButton : public QPushButton
     Q_PROPERTY(QColor disabledForegroundColor WRITE setDisabledForegroundColor READ disabledForegroundColor)
     Q_PROPERTY(QColor disabledBackgroundColor WRITE setDisabledBackgroundColor READ disabledBackgroundColor)
     Q_PROPERTY(qreal fontSize WRITE setFontSize READ fontSize)
+    Q_PROPERTY(bool isHalfRipple WRITE setHalfRipple READ isHalfRipple)
 
 public:
     explicit QtMaterialFlatButton(QWidget *parent = 0, Material::ButtonPreset preset = Material::FlatPreset);
@@ -52,6 +53,9 @@ public:
 
     void setHaloVisible(bool visible);
     bool isHaloVisible() const;
+
+    void setHalfRipple(bool halfRipple);
+    bool isHalfRipple() const;
 
     void setOverlayStyle(Material::OverlayStyle style);
     Material::OverlayStyle overlayStyle() const;

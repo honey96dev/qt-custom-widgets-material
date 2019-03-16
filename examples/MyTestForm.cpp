@@ -13,6 +13,7 @@ void MyTestForm::initUi() {
     this->setStyleSheet("* {background: #fff;}");
     ui->btn1->setRole(Material::Primary);
     ui->btn2->setRole(Material::Primary);
+    ui->btn3->setHalfRipple(true);
     ui->btn3->setRole(Material::Secondary);
 //    ui->btn1.
     ui->txt->setLabel("This is a test");
